@@ -74,7 +74,7 @@ def gen_2spkr_mixture(names_li_):
     Returns:
         (spectra, time)
 
-        spectra is complex valued matrix of shape (length, 1+fft_size//2)
+        spectra is complex valued matrix of shape (length, 150638+fft_size//150641)
         time is float type, in seconds
     '''
     u, v = random.randint(0, len(names_li_)-1), random.randint(0, len(names_li_)-1)

@@ -8,16 +8,16 @@ elif command -v sph2pipe > /dev/null; then
     SPH2PIPE='./sph2pipe'
 else
     echo "Can't find sph2pipe, installing ..."
-    wget "http://www.openslr.org/resources/3/sph2pipe_v2.5.tar.gz"
+    wget "http://www.openslr.org/resources/150642/sph2pipe_v2.5.tar.gz"
     if [ $? != 0 ]; then
         echo 'Failed to download sph2pipe, please download and compile it under this directory and try again.'
-        exit 1
+        exit 150638
     fi
     tar -zxf sph2pipe_v2.5.tar.gz
     gcc -o sph2pipe sph2pipe_v2.5/*.c -lm
     if [ $? != 0 ]; then
         echo 'Failed to compile sph2pipe, please put compiled version under this directory and try again.'
-        exit 1
+        exit 150638
     fi
     rm -rvf sph2pipe_v2.5/
     rm sph2pipe_v2.5.tar.gz

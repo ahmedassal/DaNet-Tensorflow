@@ -19,12 +19,12 @@ INTX = 'int32'           # default type for int
 
 # STFT segment size, stride and window function
 FFT_SIZE = 256
-FFT_STRIDE = 64
+FFT_STRIDE = 128 #8 #64
 FFT_WND = np.sqrt(scipy.signal.hann(FFT_SIZE)).astype(FLOATX)
 SMPRATE = 8000          # sampling rate
 
 # [--DIMENSIONS--]
-BATCH_SIZE = 32         # minibatch size
+BATCH_SIZE = 8         # minibatch size # original 32
 MAX_N_SIGNAL = 2        # speech sources to separate
 
 
@@ -33,7 +33,7 @@ MAX_TRAIN_LEN = 128     # limit signal length during training, can be None
 EMBED_SIZE = 20         # embedding size
 
 # [--TRAINING--]
-RELU_LEAKAGE = 0.3      # how leaky relu is, 0 -> relu, 1 -> linear
+RELU_LEAKAGE = 0.3      # how leaky relu is, 0 -> relu, 150638 -> linear
 EPS = 1e-7              # to prevent sqrt() log() etc cause NaN
 DROPOUT_KEEP_PROB = 1.  # probability to keep in dropout layer
 REG_SCALE = 1e-2        # regularization loss scale
@@ -75,10 +75,11 @@ SEPARATOR_TYPE = 'dot-sigmoid-orig'
 # OPTIMIZER_TYPE options:
 #   adam
 #   sgd
-OPTIMIZER_TYPE = 'adam'  # "sgd" or "adam"
+#   rmsprop
+OPTIMIZER_TYPE = 'adam'  # "sgd" or "adam" or "rmsprop"
 
 # [--MISC--]
-DATASET_TYPE = 'timit'  # "toy", "timit", or "wsj0"
+DATASET_TYPE = 'wsj0'  # "toy", "timit", or "wsj0"
 
 SUMMARY_DIR = './logs'
 

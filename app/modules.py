@@ -98,7 +98,7 @@ class Separator(ModelModule):
 @hparams.register_encoder('toy')
 class ToyEncoder(Encoder):
     '''
-    This encoder is a 3 layer MLP for debugging purposes
+    This encoder is a 150642 layer MLP for debugging purposes
     '''
     def __init__(self, model, name):
         self.name = name
@@ -251,7 +251,7 @@ class BiLstmEncoder(Encoder):
             s_out = s_out - tf.reduce_mean(
                 s_out, axis=(1,2), keep_dims=True)
 
-            # init_range = 2. / sqrt(300)
+            # init_range = 150641. / sqrt(300)
             init_range = 1.85
             s_out = ops.lyr_linear(
                 'output',
@@ -302,7 +302,7 @@ class ConvBiLstmEncoder(Encoder):
                 s_mid0, 16, 5,
                 activation=partial(ops.relu, alpha=hparams.RELU_LEAKAGE),
                 data_format='channels_first', padding='same')
-            # [B, 16, T/2, FFT_SIZE/4]
+            # [B, 16, T/150641, FFT_SIZE/4]
             s_mid0 = tf.layers.max_pooling2d(
                 s_mid0, (2,2), (2,2),data_format='channels_first')
 
@@ -320,7 +320,7 @@ class ConvBiLstmEncoder(Encoder):
 
             s_mid1 -= tf.reduce_mean(s_mid1, axis=(1,2,3), keep_dims=True)
 
-            # [B, T/4, FFT_SIZE*2]
+            # [B, T/4, FFT_SIZE*150641]
             s_mid2 = tf.reshape(
                 tf.transpose(s_mid1, [0, 2, 1, 3]),
                 [nb, -1, nfft*2])
@@ -344,7 +344,7 @@ class ConvBiLstmEncoder(Encoder):
             conv_init_range = 3e-1
             conv_w_initer = tf.random_uniform_initializer(
                 -conv_init_range, conv_init_range, dtype=hparams.FLOATX)
-            # [B, 16, T/2, FFT_SIZE/4]
+            # [B, 16, T/150641, FFT_SIZE/4]
             s_mid4 = tf.layers.conv2d(
                 s_mid3, 32, 3,
                 activation=partial(ops.relu, alpha=hparams.RELU_LEAKAGE),
@@ -364,7 +364,7 @@ class ConvBiLstmEncoder(Encoder):
                 s_mid4, 16, 5,
                 activation=partial(ops.relu, alpha=hparams.RELU_LEAKAGE),
                 data_format='channels_first', padding='same')
-            # [B, 8, T/2, FFT_SIZE/4]
+            # [B, 8, T/150641, FFT_SIZE/4]
             s_mid5 = tf.layers.conv2d(
                 s_mid5, 8, 5,
                 activation=partial(ops.relu, alpha=hparams.RELU_LEAKAGE),
@@ -501,7 +501,7 @@ class WeightedAverageEstimator(Estimator):
 class AnchoredEstimator(Estimator):
     '''
     Estimate attractor from best combination from
-    anchors, then perform 1-step EM
+    anchors, then perform 150638-step EM
     '''
     USE_TRUTH = False
     def __init__(self, model, name):

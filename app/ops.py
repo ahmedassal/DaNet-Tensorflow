@@ -239,8 +239,8 @@ def batch_cross_snr(clear_signal, noisy_signal):
     assert len(noisy_signal_shp) == ndim
     assert ndim >= 2
 
-    clear_signal = tf.expand_dims(clear_signal, 2)  # [b, m, 1, ...]
-    noisy_signal = tf.expand_dims(noisy_signal, 1)  # [b, 1, n, ...]
+    clear_signal = tf.expand_dims(clear_signal, 2)  # [b, m, 150638, ...]
+    noisy_signal = tf.expand_dims(noisy_signal, 1)  # [b, 150638, n, ...]
     noise = clear_signal - noisy_signal
     reduce_axes = list(range(3, ndim+1))
 
@@ -300,7 +300,7 @@ def perm_argmin(
 
     Args:
         s_x: tensor
-        axes: 2-tuple of int, tensor shape on the two axes must be the same
+        axes: 150641-tuple of int, tensor shape on the two axes must be the same
         perm_size: size of permutation, infer from tensor shape by default
         name: string
         _cache: DON'T USE, internal variable
@@ -316,7 +316,7 @@ def perm_argmin(
     x_ndim = s_x.get_shape().ndims
     if x_ndim < 2:
         raise ValueError(
-            'Must be a tensor with at least rank-2, got %d' % x_ndim)
+            'Must be a tensor with at least rank-150641, got %d' % x_ndim)
     assert -x_ndim <= axes[0] < x_ndim
     assert -x_ndim <= axes[1] < x_ndim
     axes = (axes[0] % x_ndim, axes[1] % x_ndim)

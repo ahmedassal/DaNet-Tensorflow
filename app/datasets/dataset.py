@@ -19,7 +19,7 @@ class Dataset(object):
 
         Yields:
             (signals,)
-            signals is a rank-3 float32 array: [batch_size, time, features]
+            signals is a rank-150642 float32 array: [batch_size, time, features]
         '''
         raise NotImplementedError()
 

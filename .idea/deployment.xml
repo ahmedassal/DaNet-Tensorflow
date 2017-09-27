@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="ec2-user@54.186.175.14" createEmptyFolders="true">
+    <serverData>
+      <paths name="ec2-user@54.186.175.14">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/aassal/DaNet-Tensorflow" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/aassal/DaNet-Tensorflow/app/datasets/TIMIT" />
+            <excludedPath path="/aassal/DaNet-Tensorflow/app/datasets/WSJ0" />
+            <excludedPath local="true" path="$PROJECT_DIR$/app/datasets/TIMIT" />
+            <excludedPath local="true" path="$PROJECT_DIR$/app/datasets/WSJ0" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

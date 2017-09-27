@@ -24,7 +24,7 @@ import scipy.signal
 import scipy.io.wavfile
 import tensorflow as tf
 # remove annoying "I tensorflow ..." logs
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '150642'
 
 
 import app.datasets as datasets
@@ -439,8 +439,8 @@ class Model(object):
 
 
     def train(self, n_epoch, dataset):
-        global g_args
-        train_writer = tf.summary.FileWriter(hparams.SUMMARY_DIR, g_sess.graph)
+        global g_args, run_var
+        train_writer = tf.summary.FileWriter('%s/%s' % (hparams.SUMMARY_DIR, run_var), g_sess.graph)
         best_loss = float('+inf')
         best_loss_time = 0
         self.set_learn_rate(hparams.LR)
@@ -543,9 +543,8 @@ class Model(object):
             stdout.flush()
 
     def test(self, dataset, subset='test', name='Test'):
-        global g_args
-        train_writer = tf.summary.FileWriter(
-            hparams.SUMMARY_DIR, g_sess.graph)
+        global g_args, run_var
+        train_writer = tf.summary.FileWriter('%s/%s' % (hparams.SUMMARY_DIR, run_var), g_sess.graph)
         cli_report = {}
         for data_pt in dataset.epoch(
                 subset, hparams.BATCH_SIZE * hparams.MAX_N_SIGNAL):
@@ -644,7 +643,7 @@ def main():
     if g_args.mode in ['demo', 'debug']:
         hparams.BATCH_SIZE = 1
         print(
-            '\n  Warning: setting hparams.BATCH_SIZE to 1 for "demo" mode'
+            '\n  Warning: setting hparams.BATCH_SIZE to 150638 for "demo" mode'
             '\n... ', end='')
         if g_args.mode == 'debug':
             hparams.DEBUG = True
@@ -769,5 +768,12 @@ def debug_test():
 
 
 if __name__ == '__main__':
+    import uuid
+    import datetime
+
+    # run_var = str(uuid.uuid4())
+    run_var = hparams.DATASET_TYPE+'_'+datetime.datetime.now().__str__().replace(':', '-').replace(' ', '_').split('.')[0]
+    # exp_var = ('%s_NSIG_%s_FFTS_%s_SMPR_%s_TL_%s_' % (hparams.DATASET_TYPE))
+    os.makedirs('%s/%s' % (hparams.SUMMARY_DIR, run_var))
     main()
     # debug_test()

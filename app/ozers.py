@@ -16,3 +16,8 @@ def sgd_ozer(learn_rate, lr_decay=None, lr_decay_epoch=2, **kwargs):
 def adam_ozer(learn_rate, lr_decay=None, lr_decay_epoch=2, **kwargs):
     kwargs.update(dict(learning_rate=learn_rate))
     return tf.train.AdamOptimizer(**kwargs)
+
+@hparams.register_optimizer('rmsprop')
+def adam_ozer(learn_rate, lr_decay=None, lr_decay_epoch=2, **kwargs):
+    kwargs.update(dict(learning_rate=learn_rate))
+    return tf.train.RMSPropOptimizer(**kwargs)

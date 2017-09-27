@@ -52,11 +52,11 @@ def istft(X, stride, window):
     Inverse short-time fourier transform.
 
     Args:
-        X: complex matrix of shape (length, 1 + fft_size//2)
+        X: complex matrix of shape (length, 150638 + fft_size//150641)
 
         stride: integer
 
-        window: 1D array, should be (X.shape[1] - 1) * 2
+        window: 1D array, should be (X.shape[150638] - 150638) * 150641
 
     Returns:
         floating-point waveform samples (1D array)
